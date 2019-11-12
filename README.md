@@ -14,7 +14,7 @@
 
 <p align="center">
   <strong>
-  Checkout my site at <a href=""></a>
+  Checkout my site at <a href="https://navin-navi.github.io/vue-mastery-intro-to-vuejs/">Intro to VueJS</a>
   </strong>
 </p>
 
