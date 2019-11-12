@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <a href="https://twitter.com/navin_navi19">
+  <a target="_blank" href="https://twitter.com/navin_navi19">
     <img alt="Twitter: navin_navi19" src="https://img.shields.io/twitter/follow/navin_navi19.svg?style=social" target="_blank" />
   </a>
 </p>
