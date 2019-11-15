@@ -12,6 +12,8 @@
       <h1>Intro to Vue JS</h1>
     </div>
     <div id="app">
+      <div>{{foo}}</div>
+      <button @click="foo = !foo">Change test</button>
       <div class="cart">Cart({{ cart.length }})</div>
       <product :premium="premium" @add-to-cart="updateCart"></product>
     </div>

@@ -204,6 +204,30 @@ Vue.component("product-tabs", {
       tabs: ["Reviews", "Make a review"],
       selectedTab: "Reviews"
     };
+  },
+  beforeCreate() {
+    console.log("🍏Before Create");
+  },
+  created() {
+    console.log("🍎Created");
+  },
+  beforeMount() {
+    console.log("🍐Before Mount");
+  },
+  mounted() {
+    console.log("🍊Mounted");
+  },
+  beforeUpdate() {
+    console.log("🍋Before Update");
+  },
+  updated() {
+    console.log("🍌Updated");
+  },
+  beforeDestroy() {
+    console.log("🍉Before Destroy");
+  },
+  destroyed() {
+    console.log("🍇Destroyed");
   }
 });
 
@@ -249,7 +273,8 @@ var app = new Vue({
   el: "#app",
   data: {
     premium: true,
-    cart: []
+    cart: [],
+    foo: true
   },
   methods: {
     updateCart: function(id) {
