@@ -204,30 +204,6 @@ Vue.component("product-tabs", {
       tabs: ["Reviews", "Make a review"],
       selectedTab: "Reviews"
     };
-  },
-  beforeCreate() {
-    console.log("🍏Before Create");
-  },
-  created() {
-    console.log("🍎Created");
-  },
-  beforeMount() {
-    console.log("🍐Before Mount");
-  },
-  mounted() {
-    console.log("🍊Mounted");
-  },
-  beforeUpdate() {
-    console.log("🍋Before Update");
-  },
-  updated() {
-    console.log("🍌Updated");
-  },
-  beforeDestroy() {
-    console.log("🍉Before Destroy");
-  },
-  destroyed() {
-    console.log("🍇Destroyed");
   }
 });
 
@@ -274,11 +250,101 @@ var app = new Vue({
   data: {
     premium: true,
     cart: [],
-    foo: true
+    toggle: true,
+    rawHtml: '<span style="color: red">This should be red.</span>',
+    // v-bind
+    isButtonDisabled: true,
+    // computed
+    message: "Hello",
+    // computed getter & setter
+    firstName: "Navin",
+    lastName: "Navi",
+    // Watchers
+    question: "",
+    answer: "I cannot give you an answer until you ask a question!"
+  },
+  watch: {
+    // whenever question changes, this function will run
+    question: function(newQuestion, oldQuestion) {
+      this.answer = "Waiting for you to stop typing...";
+      this.debouncedGetAnswer();
+    }
+  },
+  computed: {
+    // a computed getter
+    reversedMessage: function() {
+      // `this` points to the vm instance
+      return this.message
+        .split("")
+        .reverse()
+        .join("");
+    },
+    // computed getter & setter
+    fullName: {
+      // getter
+      get: function() {
+        return this.firstName + " " + this.lastName;
+      },
+      // setter
+      set: function(newValue) {
+        var names = newValue.split(" ");
+        this.firstName = names[0];
+        this.lastName = names[names.length - 1];
+      }
+    }
   },
   methods: {
     updateCart: function(id) {
       this.cart.push(id);
+    },
+    getAnswer: function() {
+      if (this.question.indexOf("?") === -1) {
+        this.answer = "Questions usually contain a question mark. ;-)";
+        return;
+      }
+      this.answer = "Thinking...";
+      const vm = this;
+      axios
+        .get("https://yesno.wtf/api")
+        .then(function(response) {
+          vm.answer = _.capitalize(response.data.answer);
+        })
+        .catch(function(error) {
+          vm.answer = "Error! Could not reach the API. " + error;
+        });
     }
+  },
+  beforeCreate() {
+    console.log("🍏Before Create");
+  },
+  created() {
+    console.log("🍎Created");
+
+    // _.debounce is a function provided by lodash to limit how
+    // often a particularly expensive operation can be run.
+    // In this case, we want to limit how often we access
+    // yesno.wtf/api, waiting until the user has completely
+    // finished typing before making the ajax request. To learn
+    // more about the _.debounce function (and its cousin
+    // _.throttle), visit: https://lodash.com/docs#debounce
+    this.debouncedGetAnswer = _.debounce(this.getAnswer, 500);
+  },
+  beforeMount() {
+    console.log("🍐Before Mount");
+  },
+  mounted() {
+    console.log("🍊Mounted");
+  },
+  beforeUpdate() {
+    console.log("🍋Before Update");
+  },
+  updated() {
+    console.log("🍌Updated");
+  },
+  beforeDestroy() {
+    console.log("🍉Before Destroy");
+  },
+  destroyed() {
+    console.log("🍇Destroyed");
   }
 });

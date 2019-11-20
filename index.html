@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,17 +8,72 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Intro to Vue JS</title>
   </head>
+
   <body>
     <div class="nav-bar">
       <h1>Intro to Vue JS</h1>
     </div>
+
+    <!-- Vue Instance -->
     <div id="app">
-      <div>{{foo}}</div>
-      <button @click="foo = !foo">Change test</button>
+      <h1>WATCHERS Example with yesno.wtf/api</h1>
+      <p>
+        Ask a yes/no question:
+        <input v-model="question" />
+      </p>
+      <p>{{ answer }}</p>
+
+      <h1>COMPUTED PROPERTY GETTER & SETTER</h1>
+      <p>First Name: {{firstName}}</p>
+      <p>Last Name: {{lastName}}</p>
+      <p>Full Name: {{fullName}}</p>
+
+      <h1>COMPUTED PROPERTY GETTER</h1>
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+
+      <h1>DIRECTIVE ATTRIBUTES</h1>
+      <p v-if="toggle">Now you see me</p>
+      <button @click="toggle = !toggle">Toggle true/false</button>
+
+      <h1>V-BIND ATTRIBUTES</h1>
+      <div>Click the button below to change the value: {{toggle}}</div>
+      <button v-bind:disabled="isButtonDisabled" @click="toggle = !toggle">
+        Toggle true/false
+      </button>
+
+      <!-- Using rawHTML in mustache syntax -->
+      <h1>RAW HTML</h1>
+      <p>Using mustaches: {{ rawHtml }}</p>
+      <span>Using v-html directive: <span v-html="rawHtml"></span></span>
+
+      <!-- You can also perform one-time interpolations that do not update on data change by using the v-once directive, but keep in mind this will also affect any other bindings on the same node -->
+      <h1>V-ONCE</h1>
+      <div v-once>
+        Click the button below to change the value: {{toggle}}
+      </div>
+
+      <!-- @click Events -->
+      <h1>CLICK EVENTS</h1>
+      <div>Click the button below to change the value: {{toggle}}</div>
+      <button @click="toggle = !toggle">Toggle true/false</button>
+      <!-- <button v-on:click="toggle = !toggle">Toggle true/false</button> -->
+
+      <h1>SAMPLE PROJECT</h1>
       <div class="cart">Cart({{ cart.length }})</div>
+
+      <!-- Vue Component -->
       <product :premium="premium" @add-to-cart="updateCart"></product>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"
+      integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script src="main.js"></script>
   </body>
 </html>
