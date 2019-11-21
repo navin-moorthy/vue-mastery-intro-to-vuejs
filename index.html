@@ -16,6 +16,14 @@
 
     <!-- Vue Instance -->
     <div id="app">
+      <h1>CONDITIONAL RENDERING</h1>
+      <div v-if="Math.random() > 0.5">
+        Now you see me
+      </div>
+      <div v-else>
+        Now you don't
+      </div>
+
       <h1>WATCHERS Example with yesno.wtf/api</h1>
       <p>
         Ask a yes/no question:
